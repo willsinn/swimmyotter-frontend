@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', event => {
 
   function gameMovement() {
     t += 1
-    if (t % 120 === 0) {
+    if (t % 30 === 0) {
       addPlat()
     }
 
@@ -57,15 +57,15 @@ document.addEventListener('DOMContentLoaded', event => {
     }
 
     if (moveX === "ArrowLeft" && circle.x > leftBound) {
-      circle.x -= 3
+      circle.x -= 4
       stage.update()
     } else if (moveX === "ArrowRight" && circle.x < rightBound) {
-      circle.x += 3
+      circle.x += 4
       stage.update()
     }
 
     for (const plat of platArr) {
-      plat.y += 5
+      plat.y += plat.speed
       stage.update()
     }
   }
@@ -79,6 +79,7 @@ document.addEventListener('DOMContentLoaded', event => {
     plat.h = 50
     plat.x = Math.floor(Math.random() * 450)
     plat.y = 0
+    plat.speed = Math.ceil(Math.random() * 10) + Math.floor(t/120) //random num 1~10, base +1 every 2s
     stage.addChild(plat)
     stage.update()
     platArr.push(plat)
