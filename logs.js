@@ -33,6 +33,6 @@ class Log {
     this.log.w = parseInt(img.dataset.w)
     this.log.h = parseInt(img.dataset.h)
     this.log.x = Math.floor(Math.random() * (canvas.width - this.log.w))
-    this.log.y = 0
+    this.log.y = -100
   }
 }

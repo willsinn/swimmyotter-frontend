@@ -1,4 +1,5 @@
 const USERS_URL = "https://swimmy-otter-backend.herokuapp.com/api/v1/users"
+const SCORES_URL = "https://swimmy-otter-backend.herokuapp.com/api/v1/scores"
 const registeredUsers = [];
 const grab = (selectorStr, parent = document) => parent.querySelector(selectorStr)
 let currentUser;
@@ -7,18 +8,22 @@ document.addEventListener('DOMContentLoaded', event => {
   const gameContainer = grab("#game-container")
   //get all users
   fetch(USERS_URL)
-    .then(r => r.json()).then(users => registeredUsers.push(...users))
+    .then(r => r.json())
+    .then(users => registeredUsers.push(...users))
 
-  //login form
-  gameContainer.innerHTML += `
-    <div id="form-container">
-      <form id="username-form">
-        <label for="name">Name</label>
-        <input type="text" name="name" value="">
-        <input type="submit" value="PLAY">
-      </form>
-    </div>
-  `
+  fetch(SCORES_URL)
+    .then(r => r.json())
+    .then(scores => {
+      const scoresUl = grab("#scores-ul")
+      scores.sort((scoreA, scoreB) => scoreB.value - scoreA.value)
+      for (let i=0; i<10; i++) {
+        if (scores[i]) {
+          const newLi = document.createElement("li")
+          newLi.innerHTML = `<b>${i+1}.</b> ${scores[i].user.name} ― ${scores[i].value}s`
+          scoresUl.appendChild(newLi)
+        }
+      }
+    })
 
   document.addEventListener("click", event => {
     event.preventDefault();
@@ -37,9 +42,12 @@ document.addEventListener('DOMContentLoaded', event => {
             "Content-Type": "application/json",
             Accept: "application/json"
           },
-          body: JSON.stringify({name: playInputName.value})
+          body: JSON.stringify({
+            user: {name: playInputName.value}
+          })
         })
-          .then(r => r.json()).then(json => currentUser = json)
+          .then(r => r.json())
+          .then(json => currentUser = json)
       }
 
       const form = grab("#username-form")
@@ -51,12 +59,28 @@ document.addEventListener('DOMContentLoaded', event => {
       // Run video game
       const stage = new createjs.Stage("canvas")
 
+      var riverImg = new Image()
+      riverImg.src = "./images/river.jpg";
+
+      riverImg.onload = () => {
+        var shape = new createjs.Shape();
+        shape.graphics.beginBitmapFill(riverImg);
+        shape.graphics.drawRect(0,0,750,750);
+        shape.x = shape.y = 0
+        shape.alpha = 0.5
+        stage.addChild(shape)
+        stage.setChildIndex(otter, stage.getNumChildren() - 1);
+      }
+
+      stage.update()
+
       const otterImg = new Image();
       otterImg.src = "./images/otter-sprite.png";
       otterImg.onload = handleOtterImageLoad;
       let otter
-      let leftBound
-      let rightBound
+      let leftBound = 0
+      let rightBound //dependant on otter width
+
 
       function handleOtterImageLoad(event) {
         const image = event.target;
@@ -66,13 +90,12 @@ document.addEventListener('DOMContentLoaded', event => {
         otter.h = 64
         otter.x = canvas.width/2 - otter.w/2
         otter.y = canvas.height - otter.h
+        otter.speed = 3
 
-        leftBound = 0
         rightBound = canvas.width - otter.w
       }
 
       let moveX = ""
-      let canMove = true
 
       document.addEventListener('keydown', e => {
         if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
@@ -91,29 +114,50 @@ document.addEventListener('DOMContentLoaded', event => {
 
       let t = 0
       let dropFreq = 60
+      let timeScore = 0
 
       function gameMovement() {
         t += 1
 
-        if (t % dropFreq === 0) {
+        if (t % 60 === 0) timeScore += 1
+
+        // debugger
+        if (t % Math.floor(1.5 * dropFreq) === 0) {
           addLog()
-          if (dropFreq > 10) dropFreq -= 1
+          if (dropFreq > 10) {
+            dropFreq -= 1
+          }
+        }
+
+        if (t % 600 === 0) {
+          otter.speed += 1
+          console.log(otter.speed)
         }
 
         if (hasCollided()) {
           stage.removeChild(...logArr)
           stage.update()
           logArr = []
-          alert(`You lose. Final time: ${Math.floor(t/60)} seconds`)
+          alert(`You lose. Final time: ${timeScore} seconds`)
+          fetch("https://swimmy-otter-backend.herokuapp.com/api/v1/scores", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+              score: {
+                user_id: currentUser.id,
+                value: timeScore
+              }
+            })
+          })
           dropFreq = 60
           t = 0
         }
 
         if (moveX === "ArrowLeft" && otter.x > leftBound) {
-          otter.x -= 4
+          otter.x -= otter.speed
           stage.update()
         } else if (moveX === "ArrowRight" && otter.x < rightBound) {
-          otter.x += 4
+          otter.x += otter.speed
           stage.update()
         }
 
@@ -131,17 +175,13 @@ document.addEventListener('DOMContentLoaded', event => {
       let logArr = []
 
       function addLog() {
-
         const randomLogImg = logImgsArr[Math.floor(logImgsArr.length * Math.random())]
         const log = new Log(randomLogImg).log
-
         log.speed = Math.ceil(Math.random() * 10) + Math.floor(t/120) //random num 1~10, base +1 every 2s
-
-        console.log(log.speed, Math.floor(t/120), dropFreq)
+        logArr.push(log)
 
         stage.addChild(log)
         stage.update()
-        logArr.push(log)
       }
 
       function hasCollided() {
@@ -155,6 +195,7 @@ document.addEventListener('DOMContentLoaded', event => {
           ) {
             collided = true
             break
+            // BREAK NECESSARY SO collided ISN'T ALWAYS BASED ON LAST log IN logArr
           } else {
             collided = false
           }

@@ -10,8 +10,21 @@
   </head>
   <body>
     <div id="game-container">
-      <canvas id="canvas" width="750" height="750" style="border: 1px solid; display: none;">
-      </canvas>
+      <canvas id="canvas" width="750" height="750" style="border: 1px solid; display: none; float: left;"></canvas>
+
+      <div id="form-and-scores" style="margin: 50px 0 0 50px; float: left;">
+        <form id="username-form">
+          <label for="name">Name</label>
+          <input type="text" name="name" value="">
+          <input type="submit" value="PLAY">
+        </form>
+
+        <div id="scores-container" style="float: right;">
+          <h1>Top Scores</h1>
+          <ul id="scores-ul" style="list-style: none;">
+          </ul>
+        </div>
+      </div>
     </div>
     <button id="pause" style="float: right; margin-top: 200px;">⏯</button>
   </body>
