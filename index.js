@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', event => {
           const newLi = document.createElement("li")
           newLi.innerHTML = `<b>${i+1}.</b> ${scores[i].user.name} ― ${scores[i].value}s`
           scoresUl.appendChild(newLi)
+          scoresUl.appendChild(document.createElement("br"))
         }
       }
     })
