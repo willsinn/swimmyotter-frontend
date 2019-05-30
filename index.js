@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', event => {
         // ADD LOGS WITH INCR. FREQ. ///////////////
         if (t % Math.floor(1.5 * dropFreq) === 0) {
           addLog()
-          if (dropFreq > 7) {
+          if (dropFreq > 5) {
             dropFreq -= Math.floor(2 * Math.random())
           }
         }
@@ -202,12 +202,12 @@ document.addEventListener('DOMContentLoaded', event => {
         if (hasPUCollided()) {
           stage.removeChild(currPowerUp)
           currPowerUp = false
-          console.log("time before", t)
-          t -= 600
-          console.log("time after", t)
+          t -= 900
+          console.log(dropFreq)
+          dropFreq += 5
+          console.log(dropFreq)
           powerUpSpeed += 2
           dropPowerUpAfter = addTimeToPowerUp(t)
-          console.log(dropPowerUpAfter)
         }
 
         if (currPowerUp) {
@@ -217,7 +217,6 @@ document.addEventListener('DOMContentLoaded', event => {
             stage.removeChild(currPowerUp)
             currPowerUp = false
             dropPowerUpAfter = addTimeToPowerUp(t)
-            console.log(dropPowerUpAfter)
           }
         }
         ////// END POWERUP MOVEMENT //////////////////////////////
@@ -265,12 +264,11 @@ document.addEventListener('DOMContentLoaded', event => {
       ////// BEGIN POWERUP FUNCTIONALITY ////////////////////
       const watchImg = new Image()
       watchImg.src = "./images/stopwatch-emoji.png"
-      const addTimeToPowerUp = currT => currT + 900 + Math.floor(300 * Math.random())
+      const addTimeToPowerUp = currT => currT + 1200 + Math.floor(450 * Math.random())
 
       let currPowerUp = false
       let dropPowerUpAfter = addTimeToPowerUp(0)
       let powerUpSpeed = 3
-      console.log(dropPowerUpAfter)
 
 
       function dropPowerUp() {
