@@ -60,16 +60,22 @@ document.addEventListener('DOMContentLoaded', event => {
       // Run video game
       const stage = new createjs.Stage("canvas")
 
-      var riverImg = new Image()
+      const riverImg = new Image()
       riverImg.src = "./images/river.jpg";
 
       riverImg.onload = () => {
-        var shape = new createjs.Shape();
-        shape.graphics.beginBitmapFill(riverImg);
-        shape.graphics.drawRect(0,0,750,750);
-        shape.x = shape.y = 0
-        shape.alpha = 0.5
-        stage.addChild(shape)
+        const whiteBkgr = new createjs.Shape()
+        whiteBkgr.graphics.beginFill("white").drawRect(0, 0, 750, 750)
+        whiteBkgr.x = whiteBkgr.y = 0
+        stage.addChild(whiteBkgr)
+
+        const riverBkgr = new createjs.Shape();
+        riverBkgr.graphics.beginBitmapFill(riverImg).drawRect(0, 0, 750, 750);
+        riverBkgr.x = riverBkgr.y = 0
+        riverBkgr.alpha = 0.5
+        stage.addChild(riverBkgr)
+
+        stage.setChildIndex(riverBkgr, stage.getNumChildren() - 1);
         stage.setChildIndex(otter, stage.getNumChildren() - 1);
       }
 
