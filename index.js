@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', event => {
       const canvas = grab("#canvas")
       canvas.style.display = ""
 
-      // Run video game
+      // GAME STARTS HERE /////////////////////////////////////////////
       const stage = new createjs.Stage("canvas")
 
       const riverImg = new Image()
@@ -119,32 +119,50 @@ document.addEventListener('DOMContentLoaded', event => {
       createjs.Ticker.framerate = 60
       createjs.Ticker.addEventListener("tick", gameMovement)
 
-      let t = 0
+      let t = 1
       let dropFreq = 60
       let timeScore = 0
 
-      function gameMovement() {
-        t += 1
 
+
+      function gameMovement() {
+        // t IS TIME IN FRAMES (60FPS), gameScore IS "SECONDS" (FRAMES/60) ///////////////
+        t += 1
         if (t % 60 === 0) timeScore += 1
 
-        // debugger
+        ////// BEGIN OTTER MOVEMENT //////////////////////////////
+        // INCREASE OTTER SPEED EVERY 10s ///////////////
+        if (t % 600 === 0) {
+          otter.speed += 1
+        }
+
+        // MOVE L & R WHILE HOLDING ⬅️ OR ➡️ ///////////////
+        if (moveX === "ArrowLeft" && otter.x > leftBound) {
+          otter.x -= otter.speed
+          stage.update()
+        } else if (moveX === "ArrowRight" && otter.x < rightBound) {
+          otter.x += otter.speed
+          stage.update()
+        }
+        ////// END OTTER MOVEMENT //////////////////////////////
+
+
+        ////// BEGIN LOG MOVEMENT //////////////////////////////
+        // ADD LOGS WITH INCR. FREQ. ///////////////
         if (t % Math.floor(1.5 * dropFreq) === 0) {
           addLog()
-          if (dropFreq > 10) {
-            dropFreq -= 1
+          if (dropFreq > 7) {
+            dropFreq -= Math.floor(2 * Math.random())
           }
         }
 
-        if (t % 600 === 0) {
-          otter.speed += 1
-          console.log(otter.speed)
-        }
-
-        if (hasCollided()) {
+        // LOG COLLISION, i.e. LOSE CONDITION ///////////////
+        if (hasLogCollided()) {
           stage.removeChild(...logArr)
           stage.update()
           logArr = []
+          stage.removeChild(currPowerUp)
+          currPowerUp = false
           alert(`You lose. Final time: ${timeScore} seconds`)
           fetch("https://swimmy-otter-backend.herokuapp.com/api/v1/scores", {
             method: "POST",
@@ -157,19 +175,13 @@ document.addEventListener('DOMContentLoaded', event => {
             })
           })
           dropFreq = 60
-          t = 0
+          t = 1
           timeScore = 0
           otter.speed = 3
         }
 
-        if (moveX === "ArrowLeft" && otter.x > leftBound) {
-          otter.x -= otter.speed
-          stage.update()
-        } else if (moveX === "ArrowRight" && otter.x < rightBound) {
-          otter.x += otter.speed
-          stage.update()
-        }
-
+        // MOVE EACH LOG DOWN A NUMBER OF PIXELS ACCORDING TO ITS "SPEED" ///////////////
+        // REMOVE ALL LOGS THAT ARE NO LONGER ON SCREEN ///////////////
         for (let i=0; i < logArr.length; i++) {
           logArr[i].y += logArr[i].speed
           stage.update()
@@ -179,21 +191,57 @@ document.addEventListener('DOMContentLoaded', event => {
             i--
           }
         }
-      }
+        ////// END LOG MOVEMENT //////////////////////////////
 
+
+        ////// BEGIN POWERUP MOVEMENT //////////////////////////////
+        if (t % dropPowerUpAfter === 0) {
+          currPowerUp = dropPowerUp()
+        }
+
+        if (hasPUCollided()) {
+          stage.removeChild(currPowerUp)
+          currPowerUp = false
+          console.log("time before", t)
+          t -= 600
+          console.log("time after", t)
+          powerUpSpeed += 2
+          dropPowerUpAfter = addTimeToPowerUp(t)
+          console.log(dropPowerUpAfter)
+        }
+
+        if (currPowerUp) {
+          currPowerUp.y += powerUpSpeed
+          stage.update()
+          if (currPowerUp.y > canvas.height) {
+            stage.removeChild(currPowerUp)
+            currPowerUp = false
+            dropPowerUpAfter = addTimeToPowerUp(t)
+            console.log(dropPowerUpAfter)
+          }
+        }
+        ////// END POWERUP MOVEMENT //////////////////////////////
+      }
+      ////////// END gameMovement() ///////////////
+
+
+
+
+      ////// BEGIN LOG FUNCTIONALITY ////////////////////
       let logArr = []
 
       function addLog() {
         const randomLogImg = logImgsArr[Math.floor(logImgsArr.length * Math.random())]
         const log = new Log(randomLogImg).log
-        log.speed = Math.ceil(Math.random() * 10) + Math.floor(t/120) //random num 1~10, base +1 every 2s
+        log.speed = Math.floor(Math.random() * 7) + Math.floor(t/120) //random num 1~10, base +1 every 2s
         logArr.push(log)
 
         stage.addChild(log)
         stage.update()
       }
 
-      function hasCollided() {
+
+      function hasLogCollided() {
         let collided
         for (const log of logArr) {
           if (
@@ -211,6 +259,44 @@ document.addEventListener('DOMContentLoaded', event => {
         }
         return collided
       }
+      ////// END LOG FUNCTIONALITY ////////////////////
+
+
+      ////// BEGIN POWERUP FUNCTIONALITY ////////////////////
+      const watchImg = new Image()
+      watchImg.src = "./images/stopwatch-emoji.png"
+      const addTimeToPowerUp = currT => currT + 900 + Math.floor(300 * Math.random())
+
+      let currPowerUp = false
+      let dropPowerUpAfter = addTimeToPowerUp(0)
+      let powerUpSpeed = 3
+      console.log(dropPowerUpAfter)
+
+
+      function dropPowerUp() {
+        const powerUp = new createjs.Bitmap(watchImg)
+        powerUp.w = powerUp.h = 60
+        powerUp.x = Math.floor(Math.random() * (canvas.width - powerUp.w))
+        powerUp.y = -100
+        stage.addChild(powerUp)
+        return powerUp
+      }
+
+      function hasPUCollided() {
+        if (
+          currPowerUp.x < otter.x + otter.w &&
+          currPowerUp.x + currPowerUp.w > otter.x &&
+          currPowerUp.y < otter.y + otter.h &&
+          currPowerUp.h + currPowerUp.y > otter.y
+        ) {
+          return true
+          // BREAK NECESSARY SO collided ISN'T ALWAYS BASED ON LAST log IN logArr
+        } else {
+          return false
+        }
+      }
+      ////// END POWERUP FUNCTIONALITY ////////////////////
+
 
       const pauseBtn = grab("#pause")
       pauseBtn.addEventListener("click", () => {

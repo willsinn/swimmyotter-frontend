@@ -1,0 +1,56 @@
+body {
+  background-image: url('./images/otter-background.jpg');
+  /* background-position: -50px -150px; */
+  background-size: 100vw 100vh;
+  background-repeat: no-repeat;
+}
+
+#title {
+  display: flex;
+  justify-content: center;
+  color: sienna;
+
+  text-shadow:
+    3px 3px 0 blanchedalmond,
+    -1px -1px 0 blanchedalmond,
+    1px -1px 0 blanchedalmond,
+    -1px 1px 0 blanchedalmond,
+    1px 1px 0 blanchedalmond;
+}
+
+#title img {
+  margin: 15px;
+}
+
+#scores-container h1 {
+  color: darkturquoise;
+
+  text-shadow:
+    3px 3px 0 midnightblue,
+    -1px -1px 0 midnightblue,
+    1px -1px 0 midnightblue,
+    -1px 1px 0 midnightblue,
+    1px 1px 0 midnightblue;
+}
+
+#scores-ul {
+  list-style: none;
+  color: lightblue;
+  font-size: 24px;
+  font-weight: 600;
+
+  text-shadow:
+    -1.5px -1.5px 0 black,
+    1.5px -1.5px 0 black,
+    -1.5px 1.5px 0 black,
+    1.5px 1.5px 0 black;
+}
+
+label {
+  color: brown;
+  text-shadow:
+    -1px -1px 0 cornsilk,
+    1px -1px 0 cornsilk,
+    -1px 1px 0 cornsilk,
+    1px 1px 0 cornsilk;
+}

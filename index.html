@@ -7,8 +7,14 @@
     <script src="./node_modules/easeljs/lib/easeljs.min.js"></script>
     <script src="./logs.js"></script>
     <script src="./index.js"></script>
+    <link rel="stylesheet" type="text/css" href="index.css">
   </head>
-  <body style="background-image: url('./images/otter-background.jpg');">
+  <body>
+    <div id="title">
+      <img height="50" width="50"src="./images/otter-emoji.png">
+      <h1>Swimmy Otter</h1>
+      <img height="50" width="50" src="./images/otter-emoji.png">
+    </div>
     <div id="game-container">
       <canvas id="canvas" width="750" height="750" style="border: 1px solid; display: none; float: left;"></canvas>
 
@@ -21,7 +27,7 @@
 
         <div id="scores-container" style="float: right;">
           <h1>Top Scores</h1>
-          <ul id="scores-ul" style="list-style: none;">
+          <ul id="scores-ul">
           </ul>
         </div>
       </div>
