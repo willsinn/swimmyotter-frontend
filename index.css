@@ -54,3 +54,10 @@ label {
     -1px 1px 0 cornsilk,
     1px 1px 0 cornsilk;
 }
+
+
+#play-btn {
+  color: saddlebrown;
+  background-color: tan;
+  border-color: cornsilk navajowhite navajowhite cornsilk;
+}
