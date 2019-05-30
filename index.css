@@ -46,13 +46,23 @@ body {
     1.5px 1.5px 0 black;
 }
 
-label {
+#username-form label {
   color: brown;
   text-shadow:
     -1px -1px 0 cornsilk,
     1px -1px 0 cornsilk,
     -1px 1px 0 cornsilk,
     1px 1px 0 cornsilk;
+}
+
+#username-form p {
+  font-size: 20px;
+  color: red;
+  text-shadow:
+    -1px -1px 0 black,
+    1px -1px 0 black,
+    -1px 1px 0 black,
+    1px 1px 0 black;
 }
 
 
