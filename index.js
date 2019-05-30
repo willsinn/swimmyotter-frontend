@@ -152,6 +152,8 @@ document.addEventListener('DOMContentLoaded', event => {
           })
           dropFreq = 60
           t = 0
+          timeScore = 0
+          otter.speed = 3
         }
 
         if (moveX === "ArrowLeft" && otter.x > leftBound) {
