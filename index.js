@@ -298,12 +298,12 @@ document.addEventListener('DOMContentLoaded', event => {
       ////// END POWERUP FUNCTIONALITY ////////////////////
 
 
-      const pauseBtn = grab("#pause")
-      pauseBtn.addEventListener("click", () => {
-        console.log(logArr)
-        console.log(otter)
-        debugger
-      })
+      // const pauseBtn = grab("#pause")
+      // pauseBtn.addEventListener("click", () => {
+      //   console.log(logArr)
+      //   console.log(otter)
+      //   debugger
+      // })
     }
   })
 })
