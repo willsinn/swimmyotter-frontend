@@ -72,7 +72,7 @@ body {
   border-color: cornsilk navajowhite navajowhite cornsilk;
 }
 #score-counter-wrapper {
-  color: green;
+  color: #33CC00;
   display: flex;
   text-shadow:
     -1px -1px 0 black,

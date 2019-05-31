@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', event => {
         t += 1
         let currentScoreCounterToTwoDecimalPlaces = (t/60).toFixed(2)
         scoreCounterWrapper.innerHTML=`
-          <h2 style="border: 2px solid green; padding: 10px;">Score: ${currentScoreCounterToTwoDecimalPlaces}s</h2>
+          <h2 style="border: 2px solid #33CC00; padding: 10px;">Score: ${currentScoreCounterToTwoDecimalPlaces}s</h2>
           `
         if (t % 60 === 0) timeScore += 1
 
@@ -168,6 +168,9 @@ document.addEventListener('DOMContentLoaded', event => {
           stage.removeChild(currPowerUp)
           currPowerUp = false
           alert(`You lose. Final time: ${timeScore} seconds`)
+          // scoreCounterWrapper.innerHTML=`
+          //   <h2 style="border: 2px solid red; padding: 10px; font-color:red;">Final-Score: ${currentScoreCounterToTwoDecimalPlaces}s</h2>
+          //   `
           fetch("https://swimmy-otter-backend.herokuapp.com/api/v1/scores", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
