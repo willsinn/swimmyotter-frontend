@@ -71,3 +71,13 @@ body {
   background-color: tan;
   border-color: cornsilk navajowhite navajowhite cornsilk;
 }
+#score-div {
+  color: #33CC00;
+  display: flex;
+  text-shadow:
+    -1px -1px 0 black,
+    1px -1px 0 black,
+    -1px 1px 0 black,
+    1px 1px 0 black;
+
+}
