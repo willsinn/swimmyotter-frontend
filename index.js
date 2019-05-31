@@ -124,16 +124,16 @@ document.addEventListener('DOMContentLoaded', event => {
       let timeScore = 0
       let gameOn = true
 
-      let scoreCounterWrapper = grab("#score-counter-wrapper")
+      let scoreCounterWrapper = grab("#score-div")
 
       function callGameIfGameOn() { if (gameOn) gameMovement() }
 
       function gameMovement() {
         // t IS TIME IN FRAMES (60FPS), gameScore IS "SECONDS" (FRAMES/60) ///////////////
         t += 1
-        let currentScoreCounterToTwoDecimalPlaces = (t/60).toFixed()
+        let currScore = (t/60).toFixed()
         scoreCounterWrapper.innerHTML=`
-          <h2 style="border: 2px solid #33CC00; padding: 10px;">Score: ${currentScoreCounterToTwoDecimalPlaces}s</h2>
+          <h2 style="border: 2px solid #33CC00; padding: 10px;">Score: ${currScore}s</h2>
           `
         if (t % 60 === 0) timeScore += 1
 
@@ -177,7 +177,7 @@ document.addEventListener('DOMContentLoaded', event => {
           scoreCounterWrapper.innerHTML=`
           <div style="display:flex; flex-direction: column;   ">
             <button style="color: saddlebrown;  background-color: tan; border-color: cornsilk navajowhite navajowhite cornsilk;" id="play-again-btn">PLAY AGAIN</button>
-            <h2 style="border: 2px solid red; padding: 10px; color:red;">Final: ${currentScoreCounterToTwoDecimalPlaces}s</h2>
+            <h2 style="border: 2px solid red; padding: 10px; color:red;">Final: ${currScore}s</h2>
           </div>
             `
             let playAgainBtn = document.getElementById("play-again-btn")

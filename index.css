@@ -71,7 +71,7 @@ body {
   background-color: tan;
   border-color: cornsilk navajowhite navajowhite cornsilk;
 }
-#score-counter-wrapper {
+#score-div {
   color: #33CC00;
   display: flex;
   text-shadow:
