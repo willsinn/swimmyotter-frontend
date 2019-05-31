@@ -119,23 +119,42 @@ document.addEventListener('DOMContentLoaded', event => {
       createjs.Ticker.framerate = 60
       createjs.Ticker.addEventListener("tick", callGameIfGameOn)
 
+      // timeScore INCREASES EVERY 60 TICKS OF T. THIS IS THE SCORE THAT GETS POSTED AT THE END
+      // USE t FOR GAME FUNCTIONALITY AND timeScore FOR FINAL SCORE
       let t = 1
       let dropFreq = 60
       let timeScore = 0
       let gameOn = true
 
-      let scoreCounterWrapper = grab("#score-div")
+      const scoreDiv = grab("#score-div")
+      scoreDiv.style.display = "flex"
+      scoreDiv.style.flexDirection = "column"
+
+      const playAgainBtn = grab("#play-again-btn")
+      playAgainBtn.style.display = "none"
+
+      const scoreH2 = grab("#score-div-h2")
+      scoreH2.style.border = "2px solid #33CC00"
+      scoreH2.style.color = "#33CC00"
+
+      const scoreNum = grab("#score-num")
+      scoreNum.innerText = "0"
 
       function callGameIfGameOn() { if (gameOn) gameMovement() }
 
       function gameMovement() {
         // t IS TIME IN FRAMES (60FPS), gameScore IS "SECONDS" (FRAMES/60) ///////////////
         t += 1
-        let currScore = (t/60).toFixed()
-        scoreCounterWrapper.innerHTML=`
-          <h2 style="border: 2px solid #33CC00; padding: 10px;">Score: ${currScore}s</h2>
-          `
-        if (t % 60 === 0) timeScore += 1
+        // let currScore = (timeScore)
+        // scoreDiv.innerHTML=`
+        //   <h2 style="border: 2px solid #33CC00; padding: 10px;">Score: ${currScore}s</h2>
+        //   `
+        // scoreDiv.style
+
+        if (t % 60 === 0) {
+          timeScore += 1
+          scoreNum.innerText = timeScore
+        }
 
         ////// BEGIN OTTER MOVEMENT //////////////////////////////
         // INCREASE OTTER SPEED EVERY 10s ///////////////
@@ -170,22 +189,21 @@ document.addEventListener('DOMContentLoaded', event => {
           logArr = []
           stage.removeChild(currPowerUp)
           currPowerUp = false
-          // alert(`You lose. Final time: ${timeScore} seconds`)
           gameOn = !gameOn
-          if (!gameOn) {
 
-          scoreCounterWrapper.innerHTML=`
-          <div style="display:flex; flex-direction: column;   ">
-            <button style="color: saddlebrown;  background-color: tan; border-color: cornsilk navajowhite navajowhite cornsilk;" id="play-again-btn">PLAY AGAIN</button>
-            <h2 style="border: 2px solid red; padding: 10px; color:red;">Final: ${currScore}s</h2>
-          </div>
-            `
-            let playAgainBtn = document.getElementById("play-again-btn")
-            playAgainBtn.addEventListener("click", event => {
-              gameOn = !gameOn
-            })
-          }
-          // let playAgainBtn = grab("#playAgainBtn")
+          scoreH2.style.borderColor = "red"
+          scoreH2.style.color = "red"
+
+          playAgainBtn.style.display = ""
+
+          playAgainBtn.addEventListener("click", event => {
+            gameOn = !gameOn
+            playAgainBtn.style.display = "none"
+            scoreH2.style.border = "2px solid #33CC00"
+            scoreH2.style.color = "#33CC00"
+            scoreNum.innerText = "0"
+          })
+
           fetch("https://swimmy-otter-backend.herokuapp.com/api/v1/scores", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
@@ -223,6 +241,7 @@ document.addEventListener('DOMContentLoaded', event => {
         }
 
         if (hasPUCollided()) {
+          console.log(timeScore)
           stage.removeChild(currPowerUp)
           currPowerUp = false
           t -= 900
@@ -231,6 +250,7 @@ document.addEventListener('DOMContentLoaded', event => {
           console.log(dropFreq)
           powerUpSpeed += 2
           dropPowerUpAfter = addTimeToPowerUp(t)
+          console.log(timeScore)
         }
 
         if (currPowerUp) {
@@ -239,7 +259,7 @@ document.addEventListener('DOMContentLoaded', event => {
           if (currPowerUp.y > canvas.height) {
             stage.removeChild(currPowerUp)
             currPowerUp = false
-            dropPowerUpAfter = addTimeToPowerUp(t)
+            // dropPowerUpAfter = addTimeToPowerUp(t)
           }
         }
         ////// END POWERUP MOVEMENT //////////////////////////////
@@ -317,14 +337,6 @@ document.addEventListener('DOMContentLoaded', event => {
         }
       }
       ////// END POWERUP FUNCTIONALITY ////////////////////
-
-
-      // const pauseBtn = grab("#pause")
-      // pauseBtn.addEventListener("click", () => {
-      //   console.log(logArr)
-      //   console.log(otter)
-      //   debugger
-      // })
     }
   })
 })

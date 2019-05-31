@@ -71,13 +71,18 @@ body {
   background-color: tan;
   border-color: cornsilk navajowhite navajowhite cornsilk;
 }
-#score-div {
-  color: #33CC00;
-  display: flex;
-  text-shadow:
-    -1px -1px 0 black,
-    1px -1px 0 black,
-    -1px 1px 0 black,
-    1px 1px 0 black;
 
+
+#score-div #play-again-btn {
+  margin: 0 auto;
+  color: saddlebrown;
+  background-color: tan;
+  border-color: cornsilk navajowhite navajowhite cornsilk;
+}
+
+#score-div #score-div-h2 {
+  display: inline-block;
+  margin: 0 auto;
+  /* border: 2px solid red; */
+  padding: 10px;
 }
