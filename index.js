@@ -124,10 +124,12 @@ document.addEventListener('DOMContentLoaded', event => {
       let timeScore = 0
 
 
-
+      let currentScoreCounter = grab("#current-score-counter")
       function gameMovement() {
         // t IS TIME IN FRAMES (60FPS), gameScore IS "SECONDS" (FRAMES/60) ///////////////
         t += 1
+        let currentScoreCounterToTwoDecimalPlaces = (t/60).toFixed(2)
+        currentScoreCounter.innerHTML=`${currentScoreCounterToTwoDecimalPlaces}`
         if (t % 60 === 0) timeScore += 1
 
         ////// BEGIN OTTER MOVEMENT //////////////////////////////
