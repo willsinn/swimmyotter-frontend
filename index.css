@@ -1,3 +1,8 @@
+:root {
+  --btns: rgb(99, 53, 31);
+  --btns-hover: rgb(178, 118, 90);
+}
+
 body {
   font-size: 16px;
 }
@@ -28,20 +33,9 @@ body {
   align-items: center;
 }
 #scores-container h1 {
-  /* color: darkturquoise;
-
-  text-shadow: 3px 3px 0 midnightblue, -1px -1px 0 midnightblue,
-    1px -1px 0 midnightblue, -1px 1px 0 midnightblue, 1px 1px 0 midnightblue; */
 }
 
 #scores-ul {
-  /* list-style: none;
-  color: lightblue;
-  font-size: 24px;
-  font-weight: 600;
-
-  text-shadow: -1.5px -1.5px 0 black, 1.5px -1.5px 0 black, -1.5px 1.5px 0 black,
-    1.5px 1.5px 0 black; */
 }
 #username-form {
 }
@@ -59,20 +53,18 @@ body {
 }
 
 #play-btn {
-  color: saddlebrown;
-  background-color: tan;
-  border-color: cornsilk navajowhite navajowhite cornsilk;
+  width: 150px;
+  height: 40px;
+  font-size: 22px;
+  border-radius: 3px;
+  letter-spacing: 0.075em;
+  background-color: var(--btns);
 }
-
-#score-div #play-again-btn {
-  /* margin: 0 auto;
-  color: saddlebrown;
-  background-color: tan;
-  border-color: cornsilk navajowhite navajowhite cornsilk; */
+#play-btn:hover {
+  background-color: var(--btns-hover);
+}
+#play-btn #score-div #play-again-btn {
 }
 
 #score-div #score-div-h2 {
-  /* display: inline-block;
-  margin: 0 auto;
-  /* border: 2px solid red; */
 }
