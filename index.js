@@ -57,8 +57,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
       const form = grab("#username-form");
       form.reset();
       form.remove();
+
       const title = grab("#title");
-      title.reset();
       title.remove();
 
       const canvas = grab("#canvas");
