@@ -39,10 +39,19 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
     Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
 }
-#scores-container h1 {
+#scores-container {
+  width: 300px;
+  align-items: center;
 }
 
 #scores-ul {
+  list-style: none;
+  width: 100%;
+}
+#scores-ul li {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 #username-form {
 }

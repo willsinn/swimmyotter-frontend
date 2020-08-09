@@ -15,14 +15,15 @@ document.addEventListener("DOMContentLoaded", (event) => {
   fetch(SCORES_URL)
     .then((r) => r.json())
     .then((scores) => {
+      console.log(scores);
       const scoresUl = grab("#scores-ul");
       scores.sort((scoreA, scoreB) => scoreB.value - scoreA.value);
       for (let i = 0; i < 10; i++) {
         if (scores[i]) {
           const newLi = document.createElement("li");
-          newLi.innerHTML = `<b>${i + 1}.</b> ${scores[i].user.name} ― ${
-            scores[i].value
-          }s`;
+          newLi.innerHTML = `<b>${i + 1}. ${
+            scores[i].user.name
+          }</b> <i>................................</i> ${scores[i].value}s`;
           scoresUl.appendChild(newLi);
           scoresUl.appendChild(document.createElement("br"));
         }
