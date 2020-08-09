@@ -25,7 +25,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
             scores[i].user.name
           }</b> <i>................................</i> ${scores[i].value}s`;
           scoresUl.appendChild(newLi);
-          scoresUl.appendChild(document.createElement("br"));
         }
       }
     });
