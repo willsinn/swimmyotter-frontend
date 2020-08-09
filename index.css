@@ -153,12 +153,12 @@ body {
   color: var(--btns);
 }
 .scores-underline.log-1 {
-  right: 50px;
+  right: 30px;
 }
 .scores-underline.log-2 {
 }
 .scores-underline.log-3 {
-  left: 50px;
+  left: 30px;
 }
 .section.order-3 {
   height: 100%;
