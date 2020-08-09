@@ -58,12 +58,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
       form.reset();
       form.remove();
 
-      const title = grab("#title");
-      title.remove();
+      const header = grab("#header");
+      header.remove();
 
       const canvas = grab("#canvas");
       canvas.style.display = "";
-
       // GAME STARTS HERE /////////////////////////////////////////////
       const stage = new createjs.Stage("canvas");
 
@@ -142,6 +141,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
       const scoreNum = grab("#score-num");
       scoreNum.innerText = "0";
+
+      const player = grab("#player");
+      player.innerHTML += `<span>Player (</span><span>${currentUser.name}</span><span>)</span>`;
+      // player.innerText = `${currentUser.name})`;
 
       createjs.Ticker.framerate = 60;
       createjs.Ticker.addEventListener("tick", callGameIfGameOn);
