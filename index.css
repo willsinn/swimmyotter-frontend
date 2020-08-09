@@ -73,7 +73,6 @@ body {
   letter-spacing: 0.075em;
   background-color: var(--btns);
   color: var(--font-w);
-  /* display: flex; */
   margin-top: 16px;
 }
 .section.order-1 {
