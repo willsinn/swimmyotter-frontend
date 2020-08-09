@@ -16,7 +16,7 @@
   </head>
   <body>
     <div class="app">
-      <div class="section order-1">
+      <div id="header" class="section order-1">
         <div id="title">
           <div class="row-center">
             <img height="50" width="50" src="./images/otter-emoji.png" />
@@ -37,28 +37,6 @@
           <input id="play-btn" type="submit" value="PLAY" />
         </form>
       </div>
-
-      <div class="section order-2">
-        <div id="form-and-scores" style="margin: 50px 0 0 50px; float: left;">
-          <div id="scores-container" style="float: right;" class="col-wide">
-            <div id="score-div" style="display: none;">
-              <h2 id="score-div-h2" style="display: flex;">
-                Score:&nbsp;<span id="score-num"></span>s
-              </h2>
-              <br />
-              <button id="play-again-btn">PLAY AGAIN</button>
-            </div>
-            <div class="row-center">
-              <h1>Top Scores</h1>
-              <img class="scores-underline log-1" src="./images/log-5.png" />
-              <img class="scores-underline log-2" src="./images/log-5.png" />
-              <img class="scores-underline log-3" src="./images/log-5.png" />
-            </div>
-            <ul id="scores-ul"></ul>
-          </div>
-        </div>
-      </div>
-
       <div class="section order-3">
         <div id="game-container">
           <canvas
@@ -67,6 +45,39 @@
             height="750"
             style="border: 1px solid; display: none; float: left;"
           ></canvas>
+        </div>
+      </div>
+      <div class="section order-2 row-center">
+        <div id="form-and-scores" style="width: 100%;">
+          <div id="scores-container" style="float: right;" class="col-wide">
+            <div>
+              <div id="player"></div>
+              <div id="score-div" style="display: none;">
+                <h2 id="score-div-h2" style="display: flex;">
+                  <div class="score-text">
+                    Score:&nbsp;<span id="score-num"></span>s
+                  </div>
+                </h2>
+                <br />
+                <div id="play-again-btn">
+                  <div>Aww.... you've been logged out. Try again!</div>
+                  <button class="again">
+                    PLAY AGAIN
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div class="row-center" style="margin-left: 60px;">
+                <h1>Top Scores</h1>
+                <img class="scores-underline log-1" src="./images/log-5.png" />
+                <img class="scores-underline log-2" src="./images/log-5.png" />
+                <img class="scores-underline log-3" src="./images/log-5.png" />
+              </div>
+              <ul id="scores-ul"></ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>
