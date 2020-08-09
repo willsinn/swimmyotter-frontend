@@ -40,6 +40,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
       }); //registeredUsers forEach
 
       if (!currentUser) {
+        console.log(
+          "Fetch posting new name to backend this may take a moment."
+        );
         fetch("https://swimmy-otter-backend.herokuapp.com/api/v1/users", {
           method: "POST",
           headers: {
@@ -141,10 +144,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
       const scoreNum = grab("#score-num");
       scoreNum.innerText = "0";
-
+      console.log(playInputName);
       const player = grab("#player");
-      player.innerHTML += `<span>Player </span><span>(${currentUser.name})</span>`;
-
+      if (currentUser) {
+        player.innerHTML = `<span>Player</span><span> (${currentUser.name})</span>`;
+      } else {
+        player.innerHTML = `<span>Player</span><span> ( X )</span>`;
+      }
       createjs.Ticker.framerate = 60;
       createjs.Ticker.addEventListener("tick", callGameIfGameOn);
 
@@ -198,10 +204,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
           scoreH2.style.borderColor = "red";
           scoreH2.style.color = "red";
 
+          gameContainer.style.display = "none";
           playAgainBtn.style.display = "";
 
           playAgainBtn.addEventListener("click", (event) => {
             gameOn = true;
+            gameContainer.style.display = "";
             playAgainBtn.style.display = "none";
             scoreH2.style.border = "2px solid #33CC00";
             scoreH2.style.color = "#33CC00";
