@@ -147,12 +147,12 @@ body {
   color: var(--btns);
 }
 .scores-underline.log-1 {
-  right: 20px;
+  right: 50px;
 }
 .scores-underline.log-2 {
 }
 .scores-underline.log-3 {
-  left: 20px;
+  left: 50px;
 }
 .section.order-3 {
   height: 100%;
@@ -183,4 +183,5 @@ body {
 #player span:nth-child(2) {
   text-transform: initial;
   font-weight: 700;
+  color: var(--darkbl);
 }

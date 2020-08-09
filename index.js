@@ -143,8 +143,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
       scoreNum.innerText = "0";
 
       const player = grab("#player");
-      player.innerHTML += `<span>Player (</span><span>${currentUser.name}</span><span>)</span>`;
-      // player.innerText = `${currentUser.name})`;
+      player.innerHTML += `<span>Player </span><span>(${currentUser.name})</span>`;
 
       createjs.Ticker.framerate = 60;
       createjs.Ticker.addEventListener("tick", callGameIfGameOn);
