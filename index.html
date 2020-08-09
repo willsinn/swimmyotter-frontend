@@ -1,40 +1,67 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>Swimmy Otter Game</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Segoe+UI&family=Roboto&family=Noto+Sans&family=Ubuntu&family=Droid+Sans&family=Helvetica+Neue&display=swap"
+      rel="stylesheet"
+    />
     <!-- <script src="https://code.createjs.com/1.0.0/easeljs.min.js"></script> -->
     <script src="./node_modules/easeljs/lib/easeljs.min.js"></script>
     <script src="./logs.js"></script>
     <script src="./index.js"></script>
-    <link rel="stylesheet" type="text/css" href="index.css">
+
+    <link rel="stylesheet" type="text/css" href="index.css" />
   </head>
   <body>
-    <div id="title">
-      <img height="50" width="50"src="./images/otter-emoji.png">
-      <h1>Swimmy Otter</h1>
-      <img height="50" width="50" src="./images/otter-emoji.png">
-    </div>
-    <div id="game-container">
-      <canvas id="canvas" width="750" height="750" style="border: 1px solid; display: none; float: left;"></canvas>
-
-      <div id="form-and-scores" style="margin: 50px 0 0 50px; float: left;">
-        <form id="username-form">
-          <p>Game works best on most screens at 90% zoom</p>
-          <label for="name">Name</label>
-          <input type="text" name="name" value="">
-          <input id="play-btn" type="submit" value="PLAY">
-        </form>
-
-        <div id="scores-container" style="float: right;">
-          <div id="score-div" style="display: none;">
-            <h2 id="score-div-h2" style="display: flex;">Score:&nbsp;<span id="score-num"></span>s</h2>
-            <br>
-            <button id="play-again-btn">PLAY AGAIN</button>
+    <div class="app">
+      <div class="section order-1">
+        <div id="title">
+          <div class="row-center">
+            <img height="50" width="50" src="./images/otter-emoji.png" />
+            <h1>Swimmy Otter</h1>
           </div>
-          <h1>Top Scores</h1>
-          <ul id="scores-ul">
-          </ul>
+        </div>
+
+        <form id="username-form" class="col-wide">
+          <label class="form-label" for="name">Enter name to begin</label>
+          <input
+            type="text"
+            name="name"
+            value=""
+            placeholder="Your otter alias here."
+            class="form-input"
+            required
+          />
+          <input id="play-btn" type="submit" value="PLAY" />
+        </form>
+      </div>
+
+      <div class="section order-2">
+        <div id="form-and-scores" style="margin: 50px 0 0 50px; float: left;">
+          <div id="scores-container" style="float: right;">
+            <div id="score-div" style="display: none;">
+              <h2 id="score-div-h2" style="display: flex;">
+                Score:&nbsp;<span id="score-num"></span>s
+              </h2>
+              <br />
+              <button id="play-again-btn">PLAY AGAIN</button>
+            </div>
+            <h1>Top Scores</h1>
+            <ul id="scores-ul"></ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="section order-3">
+        <div id="game-container">
+          <canvas
+            id="canvas"
+            width="750"
+            height="750"
+            style="border: 1px solid; display: none; float: left;"
+          ></canvas>
         </div>
       </div>
     </div>

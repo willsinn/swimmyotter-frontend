@@ -1,88 +1,107 @@
+:root {
+  --btns: rgb(99, 53, 31);
+  --btns-hover: rgb(178, 118, 90);
+  --lb: rgb(142, 205, 255, 50%);
+  --bl: rgba(33, 118, 189, 0.75);
+  --font-w: #fff;
+  --font-bl: rgb(0, 0, 0);
+  --form-bg: rgb(242, 249, 255);
+}
+
 body {
-  background-image: url('./images/otter-background.jpg');
-  background-position: -250px -250px;
-  /* background-size: auto auto; */
-  background-repeat: no-repeat;
+  font-size: 16px;
 }
 
 #title {
   display: flex;
   justify-content: center;
   color: sienna;
-
-  text-shadow:
-    3px 3px 0 blanchedalmond,
-    -1px -1px 0 blanchedalmond,
-    1px -1px 0 blanchedalmond,
-    -1px 1px 0 blanchedalmond,
-    1px 1px 0 blanchedalmond;
+  flex-direction: column;
 }
-
 #title img {
   margin: 15px;
 }
-
+.row-center {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.col-wide {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.app {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  font-size: 16.5px;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
+    Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+}
 #scores-container h1 {
-  color: darkturquoise;
-
-  text-shadow:
-    3px 3px 0 midnightblue,
-    -1px -1px 0 midnightblue,
-    1px -1px 0 midnightblue,
-    -1px 1px 0 midnightblue,
-    1px 1px 0 midnightblue;
 }
 
 #scores-ul {
-  list-style: none;
-  color: lightblue;
-  font-size: 24px;
-  font-weight: 600;
-
-  text-shadow:
-    -1.5px -1.5px 0 black,
-    1.5px -1.5px 0 black,
-    -1.5px 1.5px 0 black,
-    1.5px 1.5px 0 black;
 }
-
+#username-form {
+}
 #username-form label {
   color: brown;
-  text-shadow:
-    -1px -1px 0 cornsilk,
-    1px -1px 0 cornsilk,
-    -1px 1px 0 cornsilk,
+  text-shadow: -1px -1px 0 cornsilk, 1px -1px 0 cornsilk, -1px 1px 0 cornsilk,
     1px 1px 0 cornsilk;
 }
 
 #username-form p {
   font-size: 20px;
   color: red;
-  text-shadow:
-    -1px -1px 0 black,
-    1px -1px 0 black,
-    -1px 1px 0 black,
+  text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
     1px 1px 0 black;
 }
-
-
-#play-btn {
-  color: saddlebrown;
-  background-color: tan;
-  border-color: cornsilk navajowhite navajowhite cornsilk;
+.form-label {
+  margin: 20px 20px 4px 20px;
+  font-size: 20px;
+  font-weight: 650;
+  text-transform: uppercase;
+  letter-spacing: 0.025;
 }
-
-
-#score-div #play-again-btn {
-  margin: 0 auto;
-  color: saddlebrown;
-  background-color: tan;
-  border-color: cornsilk navajowhite navajowhite cornsilk;
+#play-btn {
+  width: 100%;
+  height: 36px;
+  font-size: 17px;
+  border-radius: 3px;
+  letter-spacing: 0.075em;
+  background-color: var(--btns);
+  color: var(--font-w);
+  /* display: flex; */
+  margin-top: 16px;
+}
+.section.order-1 {
+  padding: 8px 40px;
+  height: 325px;
+  width: 325px;
+  background-color: var(--form-bg);
+  border-radius: 3px;
+  box-shadow: 0 12px 24px -6px rgba(9, 30, 66, 0.2),
+    0 0 0 1px rgba(9, 30, 66, 0.08);
+}
+#play-btn:hover {
+  background-color: var(--btns-hover);
+}
+#play-btn #score-div #play-again-btn {
 }
 
 #score-div #score-div-h2 {
-  display: inline-block;
-  margin: 0 auto;
-  /* border: 2px solid red; */
-  padding: 10px;
+}
+.form-input {
+  height: 36px;
+  font-size: 16px;
+  padding-left: 12px;
+  border: 2px solid black;
+  border-radius: 2px;
+  background-color: var(--lb);
+  color: var(--font-bl);
+}
+.form-input:hover {
+  background-color: var(--bl);
 }
