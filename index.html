@@ -11,11 +11,14 @@
   </head>
   <body>
     <div class="app">
-      <div id="title">
-        <div class="row-center">
-          <img height="50" width="50" src="./images/otter-emoji.png" />
-          <h1>Swimmy Otter</h1>
+      <div class="section order-1">
+        <div id="title">
+          <div class="row-center">
+            <img height="50" width="50" src="./images/otter-emoji.png" />
+            <h1>Swimmy Otter</h1>
+          </div>
         </div>
+
         <form id="username-form" class="col-wide">
           <label for="name">Enter your name</label>
           <input
@@ -28,15 +31,9 @@
           <input id="play-btn" type="submit" value="PLAY" />
         </form>
       </div>
-      <div id="form-and-scores" style="margin: 50px 0 0 50px; float: left;">
-        <div id="game-container">
-          <canvas
-            id="canvas"
-            width="750"
-            height="750"
-            style="border: 1px solid; display: none; float: left;"
-          ></canvas>
 
+      <div class="section order-2">
+        <div id="form-and-scores" style="margin: 50px 0 0 50px; float: left;">
           <div id="scores-container" style="float: right;">
             <div id="score-div" style="display: none;">
               <h2 id="score-div-h2" style="display: flex;">
@@ -48,6 +45,17 @@
             <h1>Top Scores</h1>
             <ul id="scores-ul"></ul>
           </div>
+        </div>
+      </div>
+
+      <div class="section order-3">
+        <div id="game-container">
+          <canvas
+            id="canvas"
+            width="750"
+            height="750"
+            style="border: 1px solid; display: none; float: left;"
+          ></canvas>
         </div>
       </div>
     </div>

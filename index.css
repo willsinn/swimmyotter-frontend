@@ -1,4 +1,5 @@
 body {
+  font-size: 16px;
 }
 
 #title {
@@ -27,20 +28,20 @@ body {
   align-items: center;
 }
 #scores-container h1 {
-  color: darkturquoise;
+  /* color: darkturquoise;
 
   text-shadow: 3px 3px 0 midnightblue, -1px -1px 0 midnightblue,
-    1px -1px 0 midnightblue, -1px 1px 0 midnightblue, 1px 1px 0 midnightblue;
+    1px -1px 0 midnightblue, -1px 1px 0 midnightblue, 1px 1px 0 midnightblue; */
 }
 
 #scores-ul {
-  list-style: none;
+  /* list-style: none;
   color: lightblue;
   font-size: 24px;
   font-weight: 600;
 
   text-shadow: -1.5px -1.5px 0 black, 1.5px -1.5px 0 black, -1.5px 1.5px 0 black,
-    1.5px 1.5px 0 black;
+    1.5px 1.5px 0 black; */
 }
 #username-form {
 }
@@ -64,15 +65,14 @@ body {
 }
 
 #score-div #play-again-btn {
-  margin: 0 auto;
+  /* margin: 0 auto;
   color: saddlebrown;
   background-color: tan;
-  border-color: cornsilk navajowhite navajowhite cornsilk;
+  border-color: cornsilk navajowhite navajowhite cornsilk; */
 }
 
 #score-div #score-div-h2 {
-  display: inline-block;
+  /* display: inline-block;
   margin: 0 auto;
   /* border: 2px solid red; */
-  padding: 10px;
 }
