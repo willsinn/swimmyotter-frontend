@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
       let playInputName = event.target.previousElementSibling;
 
       currentUser = registeredUsers.find((user) => {
-        return user.name === playInputName.value;
+        if (user.name === playInputName.value) return user;
       }); //registeredUsers forEach
 
       if (!currentUser) {
