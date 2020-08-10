@@ -37,7 +37,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     if (event.target.value === "PLAY") {
       let playInputName = event.target.previousElementSibling;
-
+      const instructions = grab("#instructions");
+      instructions.style.display = "";
       currentUser = registeredUsers.find((user) => {
         if (user.name === playInputName.value) return user;
       }); //registeredUsers forEach
