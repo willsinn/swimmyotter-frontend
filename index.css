@@ -176,7 +176,7 @@ body {
 #instructions {
   width: 50%;
   position: absolute;
-  bottom: 2.5%;
+  top: 2.5%;
   right: 95%;
   left: 5%;
   display: flex;
