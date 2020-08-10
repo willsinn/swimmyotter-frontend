@@ -1,5 +1,8 @@
-const USERS_URL = "https://swimmy-otter-backend.herokuapp.com/api/v1/users";
-const SCORES_URL = "https://swimmy-otter-backend.herokuapp.com/api/v1/scores";
+// const USERS_URL = "https://swimmy-otter-backend.herokuapp.com/api/v1/users";
+// const SCORES_URL = "https://swimmy-otter-backend.herokuapp.com/api/v1/scores";
+const fetchUrl = "ec2-54-83-167-110.compute-1.amazonaws.com:3000";
+const USERS_URL = `${fetchUrl}/api/v1/users`;
+const SCORES_URL = `${fetchUrl}/api/v1/scores`;
 const registeredUsers = [];
 const grab = (selectorStr, parent = document) =>
   parent.querySelector(selectorStr);
@@ -43,7 +46,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         console.log(
           "Fetch posting new name to backend this may take a moment."
         );
-        fetch("https://swimmy-otter-backend.herokuapp.com/api/v1/users", {
+        fetch(`${fetchUrl}/api/v1/users`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -216,7 +219,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             scoreNum.innerText = "0";
           });
 
-          fetch("https://swimmy-otter-backend.herokuapp.com/api/v1/scores", {
+          fetch(`${fetchUrl}/api/v1/scores`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
