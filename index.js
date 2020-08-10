@@ -1,6 +1,6 @@
 // const USERS_URL = "https://swimmy-otter-backend.herokuapp.com/api/v1/users";
 // const SCORES_URL = "https://swimmy-otter-backend.herokuapp.com/api/v1/scores";
-const fetchUrl = "ec2-54-83-167-110.compute-1.amazonaws.com:3000";
+const fetchUrl = "http://ec2-54-83-167-110.compute-1.amazonaws.com:3000";
 const USERS_URL = `${fetchUrl}/api/v1/users`;
 const SCORES_URL = `${fetchUrl}/api/v1/scores`;
 const registeredUsers = [];
