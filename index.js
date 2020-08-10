@@ -44,9 +44,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
       }); //registeredUsers forEach
 
       if (!currentUser) {
-        console.log(
-          "Fetch posting new name to backend this may take a moment."
-        );
+        // console.log(
+        //   "Fetch posting new name to backend this may take a moment."
+        // );
         fetch(`${fetchUrl}/api/v1/users`, {
           method: "POST",
           headers: {
@@ -58,9 +58,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
           }),
         })
           .then((r) => r.json())
-          .then((json) => (currentUser = json));
+          .then((JSONResponse) => {
+            currentUser = JSONResponse;
+            return currentUser;
+          });
       }
-
       const form = grab("#username-form");
       form.reset();
       form.remove();
