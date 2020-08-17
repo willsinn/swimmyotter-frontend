@@ -227,12 +227,12 @@ body {
   flex: 2;
   height: 100%;
 }
-
 .score-text {
   padding: 5%;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0 16px 0 20px;
   width: 100%;
 }
 #forms-and-scores {
