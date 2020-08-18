@@ -178,9 +178,8 @@ body {
   position: absolute;
   top: 2.5%;
   right: 95%;
-  left: 5%;
+  left: 7.5%;
   display: flex;
-  justify-content: space-between;
   align-items: center;
 }
 .move-cont {
@@ -190,6 +189,7 @@ body {
   bottom: 0;
   right: 25%;
   left: 25%; */
+  margin-right: 20px;
 }
 
 .arrow-keys {
